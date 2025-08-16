@@ -23,6 +23,3 @@ SELECT DISTINCT week_date_format,
 	   DATENAME(WEEKDAY, week_date_format) AS date_name,
 	   DATENAME(MONTH, week_date_format)
 FROM data_mart_clean_weekly_sales
-### => Monday
-
---How many total transactions were there for each year in the dataset?
