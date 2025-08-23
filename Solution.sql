@@ -52,3 +52,11 @@ SELECT year_number, month_number, platform,
 FROM data_mart_clean_weekly_sales
 GROUP BY year_number, month_number, platform
 ORDER BY year_number, month_number, platform
+
+--What is the percentage of sales by demographic for each year in the dataset?
+SELECT year_number, demographic,
+	   SUM(sales) total_sales,
+	   ROUND(100.0*SUM(sales)/ SUM(SUM(sales)) OVER(PARTITION BY year_number),2) AS percentage_sales
+FROM data_mart_clean_weekly_sales
+GROUP BY year_number, demographic
+ORDER BY year_number, demographic
