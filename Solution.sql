@@ -75,3 +75,12 @@ ORDER BY age_band, demographic, platform
 		=> Nhóm người cao tuổi chiếm phần lớn doanh thu kênh retails
 		=> Ng lớn tuổi có thói quen mua offline
 
+--Can we use the avg_transaction column to find the average transaction size for each year for Retail vs Shopify? 
+--If not - how would you calculate it instead?
+Không thể vì cột avg đang tính trung bình theo cấp độ tuần vì mỗi tuần có số lượng giao dịch khác nhau.
+Cần phải lấy tổng giá trị/tổng giao dịch theo năm và platform
+SELECT year_number, platform,
+	   SUM(sales)/SUM(transactions) AS avg_sales_per_trans
+FROM data_mart_clean_weekly_sales
+GROUP BY year_number, platform
+ORDER BY year_number, platform
