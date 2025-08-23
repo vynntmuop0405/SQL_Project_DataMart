@@ -60,3 +60,18 @@ SELECT year_number, demographic,
 FROM data_mart_clean_weekly_sales
 GROUP BY year_number, demographic
 ORDER BY year_number, demographic
+
+--Which age_band and demographic values contribute the most to Retail sales?
+SELECT age_band, demographic,
+	   SUM(sales) total_sales,
+	   ROUND(100.0*SUM(sales)/ SUM(SUM(sales)) OVER(PARTITION BY platform),2) AS percentage_sales
+FROM data_mart_clean_weekly_sales
+WHERE platform = 'Retail'
+GROUP BY age_band, demographic, platform
+ORDER BY age_band, demographic, platform
+
+- Nhóm Unknown -Unknown cgieesm tỉ trọng cao nhất có thể do thiếu thông tin khách hàng
+- Nhớm Retirees - Families (23.05%) và Retirees - Couples (16.6%)
+		=> Nhóm người cao tuổi chiếm phần lớn doanh thu kênh retails
+		=> Ng lớn tuổi có thói quen mua offline
+
